@@ -1,6 +1,8 @@
+import java.util.List;
+
 public class Lead {
 
-
+    private int id = (int) (Math.random() * 2000 + 1000);
     private String name;
     private int phoneNumber;
     private String email;
@@ -45,12 +47,26 @@ public class Lead {
         this.companyName = companyName;
     }
 
-
-
-    public static Integer createID(Integer idCounter){
-        Integer autosum = idCounter++;
-        return autosum;
+    public int getId() {
+        return id;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return "Lead{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", email='" + email + '\'' +
+                ", companyName='" + companyName + '\'' +
+                '}';
+    }
+
+
 }
 
 
