@@ -168,13 +168,13 @@ public class Main {
             if (a == id) {
                 Contact contact1 = new Contact(listaLeads.get(i).getName(), listaLeads.get(i).getPhoneNumber(), listaLeads.get(i).getEmail(), listaLeads.get(i).getCompanyName());
                 listaContactos.add(contact1);
-                System.out.println("El lead " + listaLeads.get(i).getId() + " ha sido transferido a la lista de contactos");
+                System.out.println("El lead " + listaLeads.get(i).getId() + " ha sido transferido a la lista de contactos\n");
+/*FALLA AQUI!!*/Product product = PideDatos.pideProduct(); /*TODO--> ESTA FUNCION NO FUNCIONA DEL TODO BIEN, NO SE REPITE NI DA ERRORES. no devuelve nada */
+                int quantity = PideDatos.pideValorMinMaxCamiones(1, 50);
+                Opportunity opportunity1 = new Opportunity(contact1, product, quantity); //TODO--> PRODUCT ES SIEMPRE NULL!!
+                listaOpportunities.add(opportunity1);
+                System.out.println("El lead " + listaLeads.get(i).getId() + " ha sido convertido en opportunity y añadido a la lista de opportunities\n");
                 listaLeads.remove(i);
-                Product product = PideDatos.pideProduct(); /*ESTA FUNCION NO FUNCIONA DEL TODO BIEN, NO SE REPITE NI DA ERRORES */
-                int quantity = PideDatos.pideEntero("Cuantos camiones quiere comprar?"); //falta hacer que de un numero mayor que 0
-                Opportunity opportunity1 = new Opportunity(contact1, product, quantity);
-/*FALLA AQUI!!*/listaOpportunities.add(opportunity1);
-                System.out.println("El lead" + listaLeads.get(i).getId() + " ha sido convertido en opportunity y añadido a la lista de opportunities");
             }
         }
     } // HAY QUE ARREGLARLO
@@ -182,21 +182,21 @@ public class Main {
     public static void showContacts(List<Contact> listaContacts){
         for (int i = 0; i <listaContacts.size(); i++) {
             System.out.println(listaContacts.get(i).getId() + " " + listaContacts.get(i).getName());
-
         }
         System.out.println();
     } // está ok
+
+
 
     public static void showOpportunities(List<Opportunity> listaOpportunities){
         for (int i = 0; i <listaOpportunities.size(); i++) {
-            System.out.println(listaOpportunities.get(i).getId() + " " + listaOpportunities.get(i).getDecisionMaker());
-
+            System.out.println(listaOpportunities.get(i).getId() + " " + listaOpportunities.get(i).getStatus() +" " + listaOpportunities.get(i).getDecisionMaker() + listaOpportunities.get(i).getProduct() + " " + listaOpportunities.get(i).getQuantity());
         }
         System.out.println();
     } // está ok
 
 
 
-
+//escribo para hacer push
 
 }

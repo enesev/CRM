@@ -85,5 +85,20 @@ public class PideDatos {
         return null;
     }
 
+    public static int pideValorMinMaxCamiones(int valorMinimo, int valorMaximo) {
+        return pideValorMinMax(valorMinimo,valorMaximo,"Cuántos camiones quiere comprar? ");
+    }
+    public static int pideValorMinMaxCamiones(int valorMinimo, int valorMaximo, String pregunta) {
+        int valor = 0;
+        do {
+            valor = pideEntero(pregunta);
+            if ((valor < valorMinimo) || (valor > valorMaximo)) {
+                System.out.println("El valor debe ser un valor entre "
+                        + valorMinimo + " y " + valorMaximo);
+            }
+        } while ((valor < valorMinimo) || (valor > valorMaximo));
+        return valor;
+    }
+
 
 }
