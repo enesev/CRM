@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Account {
-    private Integer id; //may be removed, perhaps we'll handle ids externally
+    private Integer id;
     private Enum industry;
     private int employeeCount;
     private String city;
