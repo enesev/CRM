@@ -12,6 +12,11 @@ public class Lead {
         this.email = email;
         this.companyName = companyName;
     }
+    public Lead(){};
+
+    public void compareId(int id1, int id2) throws RuntimeException{
+        if (id1 == id2) throw new RuntimeException("Las ids deberían ser distintas");
+    }
 
     public String getName() {
         return name;
