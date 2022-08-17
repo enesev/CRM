@@ -1,6 +1,6 @@
 public class Contact {
 
-    private int id = (int) (Math.random() * 301 + 800);
+    private int contactId = (int) (Math.random() * 301 + 800);
     private String name;
     private int phoneNumber;
     private String email;
@@ -13,12 +13,12 @@ public class Contact {
         this.companyName = companyName;
     }
 
-    public int getId() {
-        return id;
+    public int getContactId() {
+        return contactId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setContactId(int contactId) {
+        this.contactId = contactId;
     }
 
     public String getName() {
@@ -56,7 +56,7 @@ public class Contact {
     @Override
     public String toString() {
         return "Contact{" +
-                "id=" + id +
+                "Contact id=" + contactId +
                 ", name='" + name + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +

@@ -1,5 +1,5 @@
 public class Opportunity {
-    private int id = (int) (Math.random() * 100 + 300);
+    private int opportunityId = (int) (Math.random() * 100 + 300);
     private Status status = Status.OPEN;
     private Contact decisionMaker;
     private Product product;
@@ -17,12 +17,12 @@ public class Opportunity {
 
     }
 
-    public int getId() {
-        return id;
+    public int getOpportunityId() {
+        return opportunityId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setOpportunityId(int opportunityId) {
+        this.opportunityId = opportunityId;
     }
 
     public Status getStatus() {
@@ -55,6 +55,17 @@ public class Opportunity {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    @Override
+    public String toString() {
+        return "Opportunity{" +
+                "opportunityId=" + opportunityId +
+                ", status=" + status +
+                ", decisionMaker=" + decisionMaker +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                '}';
     }
 }
 
