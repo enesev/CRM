@@ -1,37 +1,34 @@
 import java.util.List;
 
 public class Account {
-    private Integer id; //may be removed, perhaps we'll handle ids externally
-    private Enum industry;
+    private Integer accountId = (int) (Math.random() * 100 + 300); //may be removed, perhaps we'll handle ids externally
+    private Industry industry;
     private int employeeCount;
     private String city;
     private String country;
     private List<Contact> contactList;
     private List<Opportunity> opportunityList;
 
-    public Account(Integer id, Enum industry, int employeeCount, String city, String country, List<Contact> contactList, List<Opportunity> opportunityList) {
-        setId(id);
+    public Account(Industry industry, int employeeCount, String city, String country) {
         setIndustry(industry);
         setEmployeeCount(employeeCount);
         setCity(city);
         setCountry(country);
-        setContactList(contactList);
-        setOpportunityList(opportunityList);
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     public Enum getIndustry() {
         return industry;
     }
 
-    public void setIndustry(Enum industry) {
+    public void setIndustry(Industry industry) {
         this.industry = industry;
     }
 
@@ -73,5 +70,18 @@ public class Account {
 
     public void setOpportunityList(List<Opportunity> opportunityList) {
         this.opportunityList = opportunityList;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountId=" + accountId +
+                ", industry=" + industry +
+                ", employeeCount=" + employeeCount +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", contactList=" + contactList +
+                ", opportunityList=" + opportunityList +
+                '}';
     }
 }

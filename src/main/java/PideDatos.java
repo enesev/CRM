@@ -17,7 +17,7 @@ public class PideDatos {
                 num = Integer.parseInt(op);
                 repite = false;
             } catch (Exception a) {
-                System.out.println("Tiene que ser un valor numérico. Prueba otra vez");
+                System.err.println("Tiene que ser un valor numérico. Prueba otra vez");
             }
         }
 
@@ -32,7 +32,7 @@ public class PideDatos {
         do {
             valor = pideEntero(pregunta);
             if ((valor < valorMinimo) || (valor > valorMaximo)) {
-                System.out.println("El valor debe ser un valor entre "
+                System.err.println("El valor debe ser un valor entre "
                         + valorMinimo + " y " + valorMaximo);
             }
         } while ((valor < valorMinimo) || (valor > valorMaximo));
@@ -54,36 +54,6 @@ public class PideDatos {
         return null;
     }
 
-    public static Product pideProduct() {
-        System.out.println("Elige una opcion entre Box, Hybrid o Flatbed");
-        boolean repeat;
-        Scanner scan = new Scanner(System.in);
-        String option = scan.nextLine().toUpperCase().trim();
-
-        do {
-            repeat = false;
-            try{
-
-            if (option.equals(Product.BOX)) {
-                System.out.println("Producto Box añadido a este opportunity");
-                return Product.BOX;
-
-            }else if (option.equals(Product.HYBRID)) {
-                System.out.println("Producto Hybrid añadido a este opportunity");
-                return Product.HYBRID;
-
-            }else if (option.equals(Product.FLATBED)) {
-                System.out.println("Producto Flatbed añadido a este opportunity");
-                return Product.FLATBED;
-            }
-
-            }catch (Exception e){
-                System.err.println("Elige una opcion entre Box, Hybrid o Flatbed");
-                repeat = true;
-            }
-        } while (repeat);
-        return null;
-    }
 
     public static int pideValorMinMaxCamiones(int valorMinimo, int valorMaximo) {
         return pideValorMinMax(valorMinimo,valorMaximo,"Cuántos camiones quiere comprar? ");
@@ -93,11 +63,89 @@ public class PideDatos {
         do {
             valor = pideEntero(pregunta);
             if ((valor < valorMinimo) || (valor > valorMaximo)) {
-                System.out.println("El valor debe ser un valor entre "
+                System.err.println("El valor debe ser un valor entre "
                         + valorMinimo + " y " + valorMaximo);
             }
         } while ((valor < valorMinimo) || (valor > valorMaximo));
         return valor;
+    }
+
+    public static int pideValorMinMaxEmpleados(int valorMinimo, int valorMaximo) {
+        return pideValorMinMax(valorMinimo,valorMaximo,"Cuántos empleados tiene? ");
+    }
+    public static int pideValorMinMaxEmpleados(int valorMinimo, int valorMaximo, String pregunta) {
+        int valor = 0;
+        do {
+            valor = pideEntero(pregunta);
+            if ((valor < valorMinimo) || (valor > valorMaximo)) {
+                System.err.println("El valor debe ser un valor entre "
+                        + valorMinimo + " y " + valorMaximo);
+            }
+        } while ((valor < valorMinimo) || (valor > valorMaximo));
+        return valor;
+    }
+
+    public static Product pideProduct(){
+        Scanner scan = new Scanner(System.in);
+        boolean exit = false;
+        do {
+            try {
+                System.out.println("Elige una opcion entre Box, Hybrid o Flatbed");
+                String option = scan.nextLine().toUpperCase().trim();
+
+                switch (option) {
+                    case "BOX":
+                        return Product.BOX;
+                    case "HYBRID":
+                        return Product.HYBRID;
+                    case "FLATBED":
+                        return Product.FLATBED;
+                    default:
+                        System.err.println("You have to select an appropriate option.");
+                        exit = true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                scan.next();
+            }
+        } while (!exit);
+        return pideProduct();
+    } //ESTÁ PERFECT!
+
+    public static Industry pideIndustry(){
+        Scanner scan = new Scanner(System.in);
+        boolean exit = false;
+        do {
+            try {
+                System.out.println("Elige una opcion entre PRODUCE, ECOMMERCE, MANUFACTURING, MEDICAL, OTHER");
+                String option = scan.nextLine().toUpperCase().trim();
+
+                switch (option) {
+                    case "PRODUCE":
+                        System.out.println("Ha elegido PRODUCE.");
+                        return Industry.PRODUCE;
+                    case "ECOMMERCE":
+                        System.out.println("Ha elegido ECOMMERCE.");
+                        return Industry.ECOMMERCE;
+                    case "MANUFACTURING":
+                        System.out.println("Ha elegido MANUFACTURING.");
+                        return Industry.MANUFACTURING;
+                    case "MEDICAL":
+                        System.out.println("Ha elegido MEDICAL.");
+                        return Industry.MEDICAL;
+                    case "OTHER":
+                        System.out.println("Ha elegido OTHER.");
+                        return Industry.OTHER;
+                    default:
+                        System.err.println("You have to select an appropriate option.");
+                        exit = true;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                scan.next();
+            }
+        } while (!exit);
+        return pideIndustry();
     }
 
 

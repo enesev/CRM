@@ -1,8 +1,6 @@
-import java.util.List;
-
 public class Lead {
 
-    private int id = (int) (Math.random() * 2000 + 1000);
+    private int leadId = (int) (Math.random() * 2000 + 2000);
     private String name;
     private int phoneNumber;
     private String email;
@@ -47,18 +45,18 @@ public class Lead {
         this.companyName = companyName;
     }
 
-    public int getId() {
-        return id;
+    public int getLeadId() {
+        return leadId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setLeadId(int leadId) {
+        this.leadId = leadId;
     }
 
     @Override
     public String toString() {
         return "Lead{" +
-                "id=" + id +
+                "Lead id=" + leadId +
                 ", name='" + name + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +

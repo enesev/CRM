@@ -58,6 +58,7 @@ public class Main {
             try{
 
                 System.out.println("Please choose one of the options below: \n" +
+                        "New Lead \n" +
                         "Show Leads \n" +
                         "Lookup Lead id \n" +
                         "Convert id  \n" +
@@ -132,7 +133,7 @@ public class Main {
 
     public static void showLeads(List<Lead> lista){
         for (int i = 0; i <lista.size(); i++) {
-            System.out.println(lista.get(i).getId() + " " + lista.get(i).getName());
+            System.out.println(lista.get(i).getLeadId() + " " + lista.get(i).getName());
 
         }
         System.out.println();
@@ -148,7 +149,7 @@ public class Main {
         while (repite) {
             int id = PideDatos.pideEntero("Elige el id que quieres ver");
             for (int i = 0; i < lista.size(); i++) {
-                int a = lista.get(i).getId();
+                int a = lista.get(i).getLeadId();
                 if (a == id) {
                     System.out.println(a + " " + lista.get(i).getName());
                     repite = false;
@@ -164,24 +165,42 @@ public class Main {
     public static void convertLead(List<Lead> listaLeads, List<Contact> listaContactos,List<Opportunity> listaOpportunities, int id){
 
         for (int i = 0; i < listaLeads.size(); i++) {
-            int a = listaLeads.get(i).getId();
+            int a = listaLeads.get(i).getLeadId();
             if (a == id) {
                 Contact contact1 = new Contact(listaLeads.get(i).getName(), listaLeads.get(i).getPhoneNumber(), listaLeads.get(i).getEmail(), listaLeads.get(i).getCompanyName());
                 listaContactos.add(contact1);
-                System.out.println("El lead " + listaLeads.get(i).getId() + " ha sido transferido a la lista de contactos\n");
-/*FALLA AQUI!!*/Product product = PideDatos.pideProduct(); /*TODO--> ESTA FUNCION NO FUNCIONA DEL TODO BIEN, NO SE REPITE NI DA ERRORES. no devuelve nada */
+                System.out.println("El lead " + listaLeads.get(i).getLeadId() + " ha sido transferido a la lista de contactos.\n");
+                Product product = PideDatos.pideProduct();
                 int quantity = PideDatos.pideValorMinMaxCamiones(1, 50);
-                Opportunity opportunity1 = new Opportunity(contact1, product, quantity); //TODO--> PRODUCT ES SIEMPRE NULL!!
+                Opportunity opportunity1 = new Opportunity(contact1, product, quantity);
                 listaOpportunities.add(opportunity1);
-                System.out.println("El lead " + listaLeads.get(i).getId() + " ha sido convertido en opportunity y añadido a la lista de opportunities\n");
+                System.out.println("El lead " + listaLeads.get(i).getLeadId() + " ha sido convertido en opportunity y añadido a la lista de opportunities.\n");
                 listaLeads.remove(i);
+
             }
         }
-    } // HAY QUE ARREGLARLO
+
+
+    } // ESTÁ PERFECT
+
+
+    public static Account createAccount(){
+        Industry industry1 = PideDatos.pideIndustry();
+        int empleados = PideDatos.pideValorMinMaxEmpleados(1, 50000);
+        String city = PideDatos.pideString("¿De qué ciudad es la empresa?");
+        String country = PideDatos.pideString("¿De qué país es la ciudad?");
+        Account account1 = new Account(industry1, empleados, city, country);
+        System.out.println("Se ha creado una account con los siguientes datos :" + account1.toString());
+        return account1;
+    }
+
+
+
+
 
     public static void showContacts(List<Contact> listaContacts){
         for (int i = 0; i <listaContacts.size(); i++) {
-            System.out.println(listaContacts.get(i).getId() + " " + listaContacts.get(i).getName());
+            System.out.println(listaContacts.get(i).getContactId() + " " + listaContacts.get(i).getName());
         }
         System.out.println();
     } // está ok
@@ -190,7 +209,7 @@ public class Main {
 
     public static void showOpportunities(List<Opportunity> listaOpportunities){
         for (int i = 0; i <listaOpportunities.size(); i++) {
-            System.out.println(listaOpportunities.get(i).getId() + " " + listaOpportunities.get(i).getStatus() +" " + listaOpportunities.get(i).getDecisionMaker() + listaOpportunities.get(i).getProduct() + " " + listaOpportunities.get(i).getQuantity());
+            System.out.println(listaOpportunities.get(i).toString());
         }
         System.out.println();
     } // está ok
