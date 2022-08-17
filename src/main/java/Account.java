@@ -15,6 +15,11 @@ public class Account {
         setCity(city);
         setCountry(country);
     }
+    public Account(){};
+
+    public void compareId(int id1, int id2) throws RuntimeException{
+        if (id1 == id2) throw new RuntimeException("Las ids deberían ser distintas");
+    }
 
     public Integer getAccountId() {
         return accountId;

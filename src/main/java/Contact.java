@@ -13,6 +13,11 @@ public class Contact {
         this.companyName = companyName;
     }
 
+    public Contact(){};
+
+    public void compareId(int id1, int id2) throws RuntimeException{
+        if (id1 == id2) throw new RuntimeException("Las ids deberían ser distintas");
+    }
     public int getContactId() {
         return contactId;
     }
