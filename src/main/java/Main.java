@@ -197,7 +197,7 @@ public class Main {
         int empleados = PideDatos.pideValorMinMaxEmpleados(1, 50000);
         String city = PideDatos.pideString("¿De qué ciudad es la empresa?");
         String country = PideDatos.pideString("¿De qué país es la ciudad?");
-        Account account1 = new Account(industry1, empleados, city, country, );
+        Account account1 = new Account(industry1, empleados, city, country);
         System.out.println("Se ha creado una account con los siguientes datos :" + account1.toString());
         listaAccounts.add(account1);
     }
