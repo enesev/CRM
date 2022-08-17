@@ -15,6 +15,9 @@ public class Main {
 
         List<Opportunity> listaOpportunities = new ArrayList<>();
 
+        List<Account> listaAccounts = new ArrayList<>();
+
+
 
 
 
@@ -71,6 +74,11 @@ public class Main {
 
                 switch (option){
 
+                    case "new lead":
+                         //modificar
+
+                        break;
+
                     case "show leads":
                         showLeads(lalista);
 
@@ -84,7 +92,7 @@ public class Main {
 
                     case "convert id":
                         int id = PideDatos.pideEntero("Elige un lead para convertir a contact");
-                        convertLead(lalista, listaContactos, listaOpportunities, id);
+                        convertLead(lalista, listaContactos, listaOpportunities, id, listaAccounts);
 
                         break;
 
@@ -162,7 +170,7 @@ public class Main {
 
     //10-A Lead can be converted to an Opportunity by typing “convert id” (case insensitive)
     // where “id” is the actual id of the Lead to convert.
-    public static void convertLead(List<Lead> listaLeads, List<Contact> listaContactos,List<Opportunity> listaOpportunities, int id){
+    public static void convertLead(List<Lead> listaLeads, List<Contact> listaContactos,List<Opportunity> listaOpportunities, int id, List<Account> listaAccounts){
 
         for (int i = 0; i < listaLeads.size(); i++) {
             int a = listaLeads.get(i).getLeadId();
@@ -175,23 +183,23 @@ public class Main {
                 Opportunity opportunity1 = new Opportunity(contact1, product, quantity);
                 listaOpportunities.add(opportunity1);
                 System.out.println("El lead " + listaLeads.get(i).getLeadId() + " ha sido convertido en opportunity y añadido a la lista de opportunities.\n");
+                createAccount(listaAccounts);
                 listaLeads.remove(i);
-
             }
         }
 
 
-    } // ESTÁ PERFECT
+    } // ESTÁ PERFECT // no hemos probado si se crea un account
 
 
-    public static Account createAccount(){
+    public static void createAccount(List<Account> listaAccounts){
         Industry industry1 = PideDatos.pideIndustry();
         int empleados = PideDatos.pideValorMinMaxEmpleados(1, 50000);
         String city = PideDatos.pideString("¿De qué ciudad es la empresa?");
         String country = PideDatos.pideString("¿De qué país es la ciudad?");
-        Account account1 = new Account(industry1, empleados, city, country);
+        Account account1 = new Account(industry1, empleados, city, country, );
         System.out.println("Se ha creado una account con los siguientes datos :" + account1.toString());
-        return account1;
+        listaAccounts.add(account1);
     }
 
 
