@@ -75,7 +75,7 @@ public class Main {
                 switch (option){
 
                     case "new lead":
-                         //modificar
+                        createNewLead( lalista);
 
                         break;
 
@@ -105,15 +105,22 @@ public class Main {
                         showOpportunities(listaOpportunities);
                         break;
 
+                    case "show accounts":
+                        showAccounts(listaAccounts);
+                        break;
+/*
                     case "close-lost id":
+                        int oppId = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
 
+                        closeLostId(listaOpportunities, oppId, opportunity);
                         break;
 
 
                     case "close-won id":
-
+                        int oppId = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
+                        closeWonId(listaOpportunities, oppId, opportunity);
                         break;
-
+*/
 
                     case "exit":
                         System.out.println("Thank you for using CRM!");
@@ -133,19 +140,25 @@ public class Main {
 
 
     }
-
-
-
-
-    //8 - A list of all Leads’ id and name can be displayed by typing “Show Leads” (case insensitive).
-
-    public static void showLeads(List<Lead> lista){
-        for (int i = 0; i <lista.size(); i++) {
-            System.out.println(lista.get(i).getLeadId() + " " + lista.get(i).getName());
-
-        }
+/*
+When a new Lead is created the user will be prompted for name, phoneNumber, email, and companyName.
+All fields must be supplied to create the new Lead.
+ */
+    public static void createNewLead(List<Lead> lalista){
+        System.out.println("Creando un nuevo lead:");
+        String name = PideDatos.pideString("¿Cómo se llama el nuevo lead?");
+        int phoneNumber = PideDatos.pideEntero("¿Cuál es su teléfono?");
+        String email = PideDatos.pideString("¿Cuál es su email?");
+        String companyName = PideDatos.pideString("¿En qué empresa trabaja?");
+        Lead lead1 = new Lead(name, phoneNumber, email, companyName);
+        System.out.println("Se ha creado un nuevo lead con los siguientes datos: " + lead1.toString());
         System.out.println();
-    } // está ok
+        lalista.add(lead1);
+    }
+
+
+
+
 
 
 
@@ -162,9 +175,9 @@ public class Main {
                     System.out.println(a + " " + lista.get(i).getName());
                     repite = false;
                 }
-            }
+            }System.err.println("El id indicado no existe. Por favor, elige un id existente.");
         }
-    }    //está perfect
+    }    //falta que si no existe se repita
 
 
 
@@ -187,9 +200,7 @@ public class Main {
                 listaLeads.remove(i);
             }
         }
-
-
-    } // ESTÁ PERFECT // no hemos probado si se crea un account
+    } // ESTÁ PERFECT // no hemos probado si se crea un account --> comprobado, se crea!!
 
 
     public static void createAccount(List<Account> listaAccounts){
@@ -197,18 +208,26 @@ public class Main {
         int empleados = PideDatos.pideValorMinMaxEmpleados(1, 50000);
         String city = PideDatos.pideString("¿De qué ciudad es la empresa?");
         String country = PideDatos.pideString("¿De qué país es la ciudad?");
-        Account account1 = new Account(industry1, empleados, city, country, );
+        Account account1 = new Account(industry1, empleados, city, country);
         System.out.println("Se ha creado una account con los siguientes datos :" + account1.toString());
         listaAccounts.add(account1);
-    }
+    }// probar si funciona
 
 
+    //8 - A list of all Leads’ id and name can be displayed by typing “Show Leads” (case insensitive).
 
+    public static void showLeads(List<Lead> lista){
+        for (int i = 0; i <lista.size(); i++) {
+            System.out.println(lista.get(i).getLeadId() + " " + lista.get(i).getName());
+
+        }
+        System.out.println();
+    } // está ok
 
 
     public static void showContacts(List<Contact> listaContacts){
         for (int i = 0; i <listaContacts.size(); i++) {
-            System.out.println(listaContacts.get(i).getContactId() + " " + listaContacts.get(i).getName());
+            System.out.println(listaContacts.get(i).toString());
         }
         System.out.println();
     } // está ok
@@ -222,8 +241,60 @@ public class Main {
         System.out.println();
     } // está ok
 
+    public static void showAccounts(List<Account> listaAccounts){
+        for (int i = 0; i <listaAccounts.size(); i++) {
+            System.out.println(listaAccounts.get(i).toString());
+        }
+        System.out.println();
+    } // está ok
 
 
-//escribo para hacer push
+    public static void closeLostId(List<Opportunity> listaOpportunities, int oppId, Opportunity opportunity){ //creo que el opportunity sobra
+        for (int i = 0; i < listaOpportunities.size(); i++) {
+            int a = listaOpportunities.get(i).getOpportunityId();
+
+            if (opportunity.getStatus() == Status.OPEN && a == oppId) {
+                opportunity.setStatus(Status.CLOSED_LOST);
+                System.out.println("Status change to Closed_Status.");
+            }else if (opportunity.getStatus() != Status.OPEN && a == oppId){
+                System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
+            }else {
+                System.err.println("El id indicado no existe. Vuelve a intentarlo.");
+            }
+        }
+    }
+
+    /*
+    public static void closeLostId(List<Opportunity> listaOpportunities, int oppId, Opportunity opportunity){ //creo que el opportunity sobra
+        for (int i = 0; i < listaOpportunities.size(); i++) {
+            int a = listaOpportunities.get(i).getOpportunityId();
+
+            if (opportunity.getStatus() == Status.OPEN && a == oppId) {
+                opportunity.setStatus(Status.CLOSED_LOST);
+                System.out.println("Status change to Closed_Status.");
+            }else if (opportunity.getStatus() != Status.OPEN && a == oppId){
+                System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
+            }else {
+                System.err.println("El id indicado no existe. Vuelve a intentarlo.");
+            }
+        }
+    }*/  //OPCION RECIBIENDO 3 PARAMETROS. PERO NO VEO LA MANERA DE DAR EL OPPORTUNITY EN EL MAIN
+    public static void closeWonId(List<Opportunity> listaOpportunities, int oppId, Opportunity opportunity){
+        for (int i = 0; i < listaOpportunities.size(); i++) {
+            int a = listaOpportunities.get(i).getOpportunityId();
+
+            if (opportunity.getStatus() == Status.OPEN && a == oppId) {
+                opportunity.setStatus(Status.CLOSED_WON);
+                System.out.println("Status change to Closed_Status.");
+            }else if (opportunity.getStatus() != Status.OPEN && a == oppId){
+                System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
+            }else {
+                System.err.println("El id indicado no existe. Vuelve a intentarlo.");
+            }
+        }
+    }
+
+
+
 
 }

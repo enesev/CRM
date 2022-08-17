@@ -117,7 +117,7 @@ public class PideDatos {
         boolean exit = false;
         do {
             try {
-                System.out.println("Elige una opcion entre PRODUCE, ECOMMERCE, MANUFACTURING, MEDICAL, OTHER");
+                System.out.println("¿En qué sector trabaja la empresa? Elige una opción entre PRODUCE, ECOMMERCE, MANUFACTURING, MEDICAL, OTHER");
                 String option = scan.nextLine().toUpperCase().trim();
 
                 switch (option) {
@@ -137,10 +137,11 @@ public class PideDatos {
                         System.out.println("Ha elegido OTHER.");
                         return Industry.OTHER;
                     default:
-                        System.err.println("You have to select an appropriate option.");
+                        System.err.println("Error. Por favor, elige una de las opciones indicadas.");
                         exit = true;
                 }
             } catch (Exception e) {
+                System.err.println("No podemos incluir números en este apartado. Por favor, introduce una string.");
                 e.printStackTrace();
                 scan.next();
             }
