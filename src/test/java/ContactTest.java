@@ -16,12 +16,12 @@ public class ContactTest {
         c1.setCompanyName("GladiaWizards");
 
         Contact c2 = new Contact("Pedro",654765324,"pedro@arenabsrpg.org","GladiaWizards");
-        // De momento estos g&s no implementan lógica alguna; si esto cambia, ya tendremos los tests preparados.
+        // As of now, there's no logic implemented in our g&s; but we might want to test them in the future
         assertEquals(c2.getName(),c1.getName());
         assertEquals(c2.getPhoneNumber(),c1.getPhoneNumber());
         assertEquals(c2.getEmail(),c1.getEmail());
         assertEquals(c2.getCompanyName(),c1.getCompanyName());
-        // raramente coinciden. El método que las compara debe tirar RTex si se da el caso.
+        // compareId should throw RTex if ids are equal
         c1.setContactId(c2.getContactId());
         assertThrows(RuntimeException.class,
                 () -> c1.compareId(c1.getContactId(), c2.getContactId()));

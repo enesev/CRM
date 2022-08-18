@@ -17,16 +17,14 @@ void AccountValuesTest() throws RuntimeException{
     a1.setCountry("Gondor");
 
     Account a2 = new Account(Industry.PRODUCE,25000,"Minas Tirith","Gondor");
-    /*
-        Estos tests son innecesarios, de momento. Si en el futuro introducimos lógica en los setters,
-        podrían servirnos. (max employee count en su setter, tirar error si get country equivale a
-        a Rusia para evitar sanciones, etc).
-     */
+    /* As of now, there's no logic implemented in our g&s; but we might want to test them in the future.
+       For example, since we can't provide any more than 50 trucks, we might want to limit employeeCount
+       to avoid selling our services to companies, if their logistical chain's size is way above ours */
     assertEquals(a2.getIndustry(),a1.getIndustry());
     assertEquals(a2.getEmployeeCount(),a1.getEmployeeCount());
     assertEquals(a2.getCity(),a1.getCity());
     assertEquals(a2.getCountry(),a1.getCountry());
-    // Raramente coinciden. Nos aseguramos de que el método que las compara tire RTex si se da el caso.
+    // compareId should throw RTex if ids are equal
     a1.setAccountId(a2.getAccountId());
     assertThrows(RuntimeException.class,
             () -> a1.compareId(a1.getAccountId(), a2.getAccountId()));

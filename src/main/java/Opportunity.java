@@ -11,14 +11,6 @@ public class Opportunity {
         setQuantity(quantity);
     }
 
-
-
-
-
-    public void alterOpportunity(int id){
-
-    }
-
     public int getOpportunityId() {
         return opportunityId;
     }

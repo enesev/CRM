@@ -15,7 +15,7 @@ public class Lead {
     public Lead(){};
 
     public void compareId(int id1, int id2) throws RuntimeException{
-        if (id1 == id2) throw new RuntimeException("Id's must be different.");
+        if (id1 == id2) throw new RuntimeException("Ids must be different.");
     }
 
     public String getName() {
