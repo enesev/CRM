@@ -64,9 +64,10 @@ public class Main {
                         "New Lead \n" +
                         "Show Leads \n" +
                         "Lookup Lead id \n" +
-                        "Convert id  \n" +
-                        "Show contacts  \n" +
-                        "Show opportunities  \n" +
+                        "Convert id \n" +
+                        "Show contacts \n" +
+                        "Show opportunities \n" +
+                        "Show accounts \n" +
                         "Close-lost id \n" +
                         "Close-won id \n" +
                         "Exit \n");
@@ -84,14 +85,12 @@ public class Main {
 
                         break;
 
-
                     case "lookup lead id":
                         lookupLeadId(lalista);
                         break;
 
-
                     case "convert id":
-                        int id = PideDatos.pideEntero("Elige un lead para convertir a contact");
+                        int id = PideDatos.pideEntero("Select a lead's id to convert it to contact.");
                         convertLead(lalista, listaContactos, listaOpportunities, id, listaAccounts);
 
                         break;
@@ -110,17 +109,15 @@ public class Main {
                         break;
 
                     case "close-lost id":
-                        int oppId = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
+                        int oppId = PideDatos.pideEntero("Write opportunity's id you want to mark as closed-lost.");
 
                         closeLostId(listaOpportunities, oppId);
                         break;
 
-
                     case "close-won id":
-                        int oppId2 = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
+                        int oppId2 = PideDatos.pideEntero("Write opportunity's id you want to mark as closed-won.");
                         closeWonId(listaOpportunities, oppId2);
                         break;
-
 
                     case "exit":
                         System.out.println("Thank you for using CRM!");
@@ -129,7 +126,7 @@ public class Main {
 
 
                     default:
-                        System.err.println("You have to select an appropriate option");
+                        System.err.println("You have to select an appropriate option. Try again.");
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -140,49 +137,36 @@ public class Main {
 
 
     }
-/*
-When a new Lead is created the user will be prompted for name, phoneNumber, email, and companyName.
-All fields must be supplied to create the new Lead.
- */
+
     public static void createNewLead(List<Lead> lalista){
-        System.out.println("Creando un nuevo lead:");
-        String name = PideDatos.pideString("¿Cómo se llama el nuevo lead?");
-        int phoneNumber = PideDatos.pideEntero("¿Cuál es su teléfono?");
-        String email = PideDatos.pideString("¿Cuál es su email?");
-        String companyName = PideDatos.pideString("¿En qué empresa trabaja?");
+        System.out.println("Creating a new lead:");
+        String name = PideDatos.pideString("What is the name of the new lead?");
+        int phoneNumber = PideDatos.pideEntero("What is its phone number?");
+        String email = PideDatos.pideString("What is its email address?");
+        String companyName = PideDatos.pideString("What company does he/she work for?");
         Lead lead1 = new Lead(name, phoneNumber, email, companyName);
-        System.out.println("Se ha creado un nuevo lead con los siguientes datos: " + lead1.toString());
+        System.out.println("A new lead has been created with the following data: " + lead1.toString());
         System.out.println();
         lalista.add(lead1);
     }
 
 
-
-
-
-
-
-    //9- An individual Lead’s details can be displayed by typing “Lookup Lead id” (case insensitive) where
-    // “id” is the actual id of the Lead to lookup.
     public static void lookupLeadId(List<Lead> lista) {
 
         boolean repite = true;
         while (repite) {
-            int id = PideDatos.pideEntero("Elige el id que quieres ver");
+            int id = PideDatos.pideEntero("Choose the id you want to see detailed");
             for (int i = 0; i < lista.size(); i++) {
                 int a = lista.get(i).getLeadId();
                 if (a == id) {
-                    System.out.println(a + " " + lista.get(i).getName());
+                    System.out.println("Lead's id and name are: " + lista.get(i).getLeadId() + " " + lista.get(i).getName());
                     repite = false;
                 }
-            }System.err.println("El id indicado no existe. Por favor, elige un id existente.");
+            }
         }
-    }    //falta que si no existe se repita
+    }    //esta perfect
 
 
-
-    //10-A Lead can be converted to an Opportunity by typing “convert id” (case insensitive)
-    // where “id” is the actual id of the Lead to convert.
     public static void convertLead(List<Lead> listaLeads, List<Contact> listaContactos,List<Opportunity> listaOpportunities, int id, List<Account> listaAccounts){
 
         for (int i = 0; i < listaLeads.size(); i++) {
@@ -190,31 +174,31 @@ All fields must be supplied to create the new Lead.
             if (a == id) {
                 Contact contact1 = new Contact(listaLeads.get(i).getName(), listaLeads.get(i).getPhoneNumber(), listaLeads.get(i).getEmail(), listaLeads.get(i).getCompanyName());
                 listaContactos.add(contact1);
-                System.out.println("El lead " + listaLeads.get(i).getLeadId() + " ha sido transferido a la lista de contactos.\n");
+                System.out.println("The lead " + listaLeads.get(i).getLeadId() + " has been transferred to the contact list.\n");
                 Product product = PideDatos.pideProduct();
                 int quantity = PideDatos.pideValorMinMaxCamiones(1, 50);
                 Opportunity opportunity1 = new Opportunity(contact1, product, quantity);
                 listaOpportunities.add(opportunity1);
-                System.out.println("El lead " + listaLeads.get(i).getLeadId() + " ha sido convertido en opportunity y añadido a la lista de opportunities.\n");
+                System.out.println("The lead " + listaLeads.get(i).getLeadId() + " has been converted to opportunity and added to the list of opportunities, with the following data : " + opportunity1.toString() + ".\n");
                 createAccount(listaAccounts);
                 listaLeads.remove(i);
             }
         }
-    } // ESTÁ PERFECT // no hemos probado si se crea un account --> comprobado, se crea!!
+    } //
 
 
     public static void createAccount(List<Account> listaAccounts){
         Industry industry1 = PideDatos.pideIndustry();
         int empleados = PideDatos.pideValorMinMaxEmpleados(1, 50000);
-        String city = PideDatos.pideString("¿De qué ciudad es la empresa?");
-        String country = PideDatos.pideString("¿De qué país es la ciudad?");
+        String city = PideDatos.pideString("What city is the company from?");
+        String country = PideDatos.pideString("What country is the city from?");
         Account account1 = new Account(industry1, empleados, city, country);
-        System.out.println("Se ha creado una account con los siguientes datos :" + account1.toString());
+        System.out.println("An account has been created with the following data :" + account1.toString() + "\n");
         listaAccounts.add(account1);
-    }// probar si funciona
+    }//
 
 
-    //8 - A list of all Leads’ id and name can be displayed by typing “Show Leads” (case insensitive).
+
 
     public static void showLeads(List<Lead> lista){
         for (int i = 0; i <lista.size(); i++) {
@@ -254,31 +238,31 @@ All fields must be supplied to create the new Lead.
             Opportunity opportunity1 = listaOpportunities.get(i);
             if (opportunity1.getOpportunityId() == oppId){
 
-            if (opportunity1.getStatus() == Status.OPEN) {
-                opportunity1.setStatus(Status.CLOSED_LOST);
-                System.out.println("Status changed to Closed_Status.");
-            }else if (opportunity1.getStatus() != Status.OPEN){
-                System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
-            }
-            }else {
-                System.err.println("El id indicado no existe. Vuelve a intentarlo.");
-            }
-        }
-    }
-
-    public static void closeWonId(List<Opportunity> listaOpportunities, int oppId){
-        for (int i = 0; i < listaOpportunities.size(); i++) {
-            Opportunity opportunity1 = listaOpportunities.get(i);
-            if (opportunity1.getOpportunityId() == oppId){
-
                 if (opportunity1.getStatus() == Status.OPEN) {
-                    opportunity1.setStatus(Status.CLOSED_WON);
-                    System.out.println("Status changed to Closed_Status.");
+                    opportunity1.setStatus(Status.CLOSED_LOST);
+                    System.out.println("Status changed to Closed_Lost status.");
                 }else if (opportunity1.getStatus() != Status.OPEN){
                     System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
                 }
             }else {
-                System.err.println("El id indicado no existe. Vuelve a intentarlo.");
+                System.err.println("Selected id doesn't exist. Please choose a valid id.");
+            }
+        }
+    }
+
+    public static void closeWonId(List<Opportunity> listaOpportunities, int oppId2){
+        for (int i = 0; i < listaOpportunities.size(); i++) {
+            Opportunity opportunity1 = listaOpportunities.get(i);
+            if (opportunity1.getOpportunityId() == oppId2){
+
+                if (opportunity1.getStatus() == Status.OPEN) {
+                    opportunity1.setStatus(Status.CLOSED_WON);
+                    System.out.println("Status changed to Closed_Won status.");
+                }else if (opportunity1.getStatus() != Status.OPEN){
+                    System.err.println("This opportunity's status is not open. Please select an open oportunity");
+                }
+            }else {
+                System.err.println("Selected id doesn't exist. Please choose a valid id.");
             }
         }
     } //ESTÁ OK

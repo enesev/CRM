@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
-    private Integer accountId = (int) (Math.random() * 100 + 300); //may be removed, perhaps we'll handle ids externally
+    private Integer accountId = (int) (Math.random() * 100 + 300);
     private Industry industry;
     private int employeeCount;
     private String city;
@@ -19,7 +19,7 @@ public class Account {
     public Account(){};
 
     public void compareId(int id1, int id2) throws RuntimeException{
-        if (id1 == id2) throw new RuntimeException("Las ids deberían ser distintas");
+        if (id1 == id2) throw new RuntimeException("Id's must be different.");
     }
 
     public Integer getAccountId() {

@@ -17,7 +17,7 @@ public class PideDatos {
                 num = Integer.parseInt(op);
                 repite = false;
             } catch (Exception a) {
-                System.err.println("Tiene que ser un valor numérico. Prueba otra vez");
+                System.err.println("Must be a numeric value. Please, try again.");
             }
         }
 
@@ -25,15 +25,15 @@ public class PideDatos {
     }
 
     public static int pideValorMinMax(int valorMinimo, int valorMaximo) {
-        return pideValorMinMax(valorMinimo,valorMaximo,"Introduce el valor entre "+valorMinimo+" y "+valorMaximo);
+        return pideValorMinMax(valorMinimo,valorMaximo,"Enter a value between "+valorMinimo+" and "+valorMaximo);
     }
     public static int pideValorMinMax(int valorMinimo, int valorMaximo, String pregunta) {
         int valor = 0;
         do {
             valor = pideEntero(pregunta);
             if ((valor < valorMinimo) || (valor > valorMaximo)) {
-                System.err.println("El valor debe ser un valor entre "
-                        + valorMinimo + " y " + valorMaximo);
+                System.err.println("The value must be between "
+                        + valorMinimo + " and " + valorMaximo);
             }
         } while ((valor < valorMinimo) || (valor > valorMaximo));
         return valor;
@@ -56,30 +56,30 @@ public class PideDatos {
 
 
     public static int pideValorMinMaxCamiones(int valorMinimo, int valorMaximo) {
-        return pideValorMinMax(valorMinimo,valorMaximo,"Cuántos camiones quiere comprar? ");
+        return pideValorMinMax(valorMinimo,valorMaximo,"How many trucks does it want to buy? ");
     }
     public static int pideValorMinMaxCamiones(int valorMinimo, int valorMaximo, String pregunta) {
         int valor = 0;
         do {
             valor = pideEntero(pregunta);
             if ((valor < valorMinimo) || (valor > valorMaximo)) {
-                System.err.println("El valor debe ser un valor entre "
-                        + valorMinimo + " y " + valorMaximo);
+                System.err.println("The value must be between "
+                        + valorMinimo + " and " + valorMaximo);
             }
         } while ((valor < valorMinimo) || (valor > valorMaximo));
         return valor;
     }
 
     public static int pideValorMinMaxEmpleados(int valorMinimo, int valorMaximo) {
-        return pideValorMinMax(valorMinimo,valorMaximo,"Cuántos empleados tiene? ");
+        return pideValorMinMax(valorMinimo,valorMaximo,"How many employees does it have? ");
     }
     public static int pideValorMinMaxEmpleados(int valorMinimo, int valorMaximo, String pregunta) {
         int valor = 0;
         do {
             valor = pideEntero(pregunta);
             if ((valor < valorMinimo) || (valor > valorMaximo)) {
-                System.err.println("El valor debe ser un valor entre "
-                        + valorMinimo + " y " + valorMaximo);
+                System.err.println("The value must be between "
+                        + valorMinimo + " and " + valorMaximo);
             }
         } while ((valor < valorMinimo) || (valor > valorMaximo));
         return valor;
@@ -90,7 +90,7 @@ public class PideDatos {
         boolean exit = false;
         do {
             try {
-                System.out.println("Elige una opcion entre Box, Hybrid o Flatbed");
+                System.out.println("Choose an option between Box, Hybrid or Flatbed");
                 String option = scan.nextLine().toUpperCase().trim();
 
                 switch (option) {
@@ -117,31 +117,31 @@ public class PideDatos {
         boolean exit = false;
         do {
             try {
-                System.out.println("¿En qué sector trabaja la empresa? Elige una opción entre PRODUCE, ECOMMERCE, MANUFACTURING, MEDICAL, OTHER");
+                System.out.println("In which sector does the company work? Choose an option between PRODUCE, ECOMMERCE, MANUFACTURING, MEDICAL, OTHER");
                 String option = scan.nextLine().toUpperCase().trim();
 
                 switch (option) {
                     case "PRODUCE":
-                        System.out.println("Ha elegido PRODUCE.");
+                        System.out.println("PRODUCE selected.");
                         return Industry.PRODUCE;
                     case "ECOMMERCE":
-                        System.out.println("Ha elegido ECOMMERCE.");
+                        System.out.println("ECOMMERCE selected.");
                         return Industry.ECOMMERCE;
                     case "MANUFACTURING":
-                        System.out.println("Ha elegido MANUFACTURING.");
+                        System.out.println("MANUFACTURING selected.");
                         return Industry.MANUFACTURING;
                     case "MEDICAL":
-                        System.out.println("Ha elegido MEDICAL.");
+                        System.out.println("MEDICAL selected.");
                         return Industry.MEDICAL;
                     case "OTHER":
-                        System.out.println("Ha elegido OTHER.");
+                        System.out.println("OTHER selected.");
                         return Industry.OTHER;
                     default:
-                        System.err.println("Error. Por favor, elige una de las opciones indicadas.");
+                        System.err.println("Error. Choose one of the indicated options.");
                         exit = true;
                 }
             } catch (Exception e) {
-                System.err.println("No podemos incluir números en este apartado. Por favor, introduce una string.");
+                System.err.println("Numbers are not allowed in this camp. Please, enter a text.");
                 e.printStackTrace();
                 scan.next();
             }

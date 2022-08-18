@@ -70,13 +70,3 @@ public class Opportunity {
                 '}';
     }
 }
-
-
-
-/* public Enum status {
-OPEN, CLOSED_WON, CLOSED_LOST
-        } */
-/*
-public Enum product {
-HYBRID, FLATBED, BOX
-        }*/

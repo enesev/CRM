@@ -15,7 +15,7 @@ public class Lead {
     public Lead(){};
 
     public void compareId(int id1, int id2) throws RuntimeException{
-        if (id1 == id2) throw new RuntimeException("Las ids deberían ser distintas");
+        if (id1 == id2) throw new RuntimeException("Id's must be different.");
     }
 
     public String getName() {
@@ -61,7 +61,7 @@ public class Lead {
     @Override
     public String toString() {
         return "Lead{" +
-                "Lead id=" + leadId +
+                "LeadId=" + leadId +
                 ", name='" + name + '\'' +
                 ", phoneNumber=" + phoneNumber +
                 ", email='" + email + '\'' +
