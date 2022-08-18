@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Account {
@@ -6,8 +7,8 @@ public class Account {
     private int employeeCount;
     private String city;
     private String country;
-    private List<Contact> contactList;
-    private List<Opportunity> opportunityList;
+    private List<Contact> contactList = new ArrayList<>();
+    private List<Opportunity> opportunityList = new ArrayList<>();
 
     public Account(Industry industry, int employeeCount, String city, String country) {
         setIndustry(industry);
@@ -69,10 +70,16 @@ public class Account {
         this.contactList = contactList;
     }
 
+    public void addContactList(Contact contact){
+        this.contactList.add(contact);
+    }
     public List<Opportunity> getOpportunityList() {
         return opportunityList;
     }
 
+    public void addOpportunityList(Opportunity opportunity){
+        this.opportunityList.add(opportunity);
+    }
     public void setOpportunityList(List<Opportunity> opportunityList) {
         this.opportunityList = opportunityList;
     }

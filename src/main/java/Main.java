@@ -108,19 +108,19 @@ public class Main {
                     case "show accounts":
                         showAccounts(listaAccounts);
                         break;
-/*
+
                     case "close-lost id":
                         int oppId = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
 
-                        closeLostId(listaOpportunities, oppId, opportunity);
+                        closeLostId(listaOpportunities, oppId);
                         break;
 
 
                     case "close-won id":
                         int oppId = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
-                        closeWonId(listaOpportunities, oppId, opportunity);
+                        closeWonId(listaOpportunities, oppId);
                         break;
-*/
+
 
                     case "exit":
                         System.out.println("Thank you for using CRM!");
@@ -249,50 +249,39 @@ All fields must be supplied to create the new Lead.
     } // está ok
 
 
-    public static void closeLostId(List<Opportunity> listaOpportunities, int oppId, Opportunity opportunity){ //creo que el opportunity sobra
+    public static void closeLostId(List<Opportunity> listaOpportunities, int oppId){
         for (int i = 0; i < listaOpportunities.size(); i++) {
-            int a = listaOpportunities.get(i).getOpportunityId();
+            Opportunity opportunity1 = listaOpportunities.get(i);
+            if (opportunity1.getOpportunityId() == oppId){
 
-            if (opportunity.getStatus() == Status.OPEN && a == oppId) {
-                opportunity.setStatus(Status.CLOSED_LOST);
-                System.out.println("Status change to Closed_Status.");
-            }else if (opportunity.getStatus() != Status.OPEN && a == oppId){
+            if (opportunity1.getStatus() == Status.OPEN) {
+                opportunity1.setStatus(Status.CLOSED_LOST);
+                System.out.println("Status changed to Closed_Status.");
+            }else if (opportunity1.getStatus() != Status.OPEN){
                 System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
+            }
             }else {
                 System.err.println("El id indicado no existe. Vuelve a intentarlo.");
             }
         }
     }
 
-    /*
-    public static void closeLostId(List<Opportunity> listaOpportunities, int oppId, Opportunity opportunity){ //creo que el opportunity sobra
+    public static void closeWonId(List<Opportunity> listaOpportunities, int oppId){
         for (int i = 0; i < listaOpportunities.size(); i++) {
-            int a = listaOpportunities.get(i).getOpportunityId();
+            Opportunity opportunity1 = listaOpportunities.get(i);
+            if (opportunity1.getOpportunityId() == oppId){
 
-            if (opportunity.getStatus() == Status.OPEN && a == oppId) {
-                opportunity.setStatus(Status.CLOSED_LOST);
-                System.out.println("Status change to Closed_Status.");
-            }else if (opportunity.getStatus() != Status.OPEN && a == oppId){
-                System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
+                if (opportunity1.getStatus() == Status.OPEN) {
+                    opportunity1.setStatus(Status.CLOSED_WON);
+                    System.out.println("Status changed to Closed_Status.");
+                }else if (opportunity1.getStatus() != Status.OPEN){
+                    System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
+                }
             }else {
                 System.err.println("El id indicado no existe. Vuelve a intentarlo.");
             }
         }
-    }*/  //OPCION RECIBIENDO 3 PARAMETROS. PERO NO VEO LA MANERA DE DAR EL OPPORTUNITY EN EL MAIN
-    public static void closeWonId(List<Opportunity> listaOpportunities, int oppId, Opportunity opportunity){
-        for (int i = 0; i < listaOpportunities.size(); i++) {
-            int a = listaOpportunities.get(i).getOpportunityId();
-
-            if (opportunity.getStatus() == Status.OPEN && a == oppId) {
-                opportunity.setStatus(Status.CLOSED_WON);
-                System.out.println("Status change to Closed_Status.");
-            }else if (opportunity.getStatus() != Status.OPEN && a == oppId){
-                System.err.println("This opportunity's status is not open. Please select an oppen oportunity");
-            }else {
-                System.err.println("El id indicado no existe. Vuelve a intentarlo.");
-            }
-        }
-    }
+    } //ESTÁ OK
 
 
 

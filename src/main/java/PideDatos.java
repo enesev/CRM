@@ -52,7 +52,7 @@ public class PideDatos {
             }
         } while (repeat);
         return null;
-    }
+    }//para que no se puedan poner numeros --> (br.readLine().matches("\\D")); // d --> si los contiene
 
 
     public static int pideValorMinMaxCamiones(int valorMinimo, int valorMaximo) {
