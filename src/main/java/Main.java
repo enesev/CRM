@@ -4,11 +4,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-
-        //TODO ESTO SON PRUEBAS//
-
-
         List<Lead> lalista = new ArrayList<>();
 
         List<Contact> listaContactos = new ArrayList<>();
@@ -17,37 +12,6 @@ public class Main {
 
         List<Account> listaAccounts = new ArrayList<>();
 
-
-
-
-
-        Lead lead1 = new Lead("juan", 555, "eee", "ddd");
-        Lead lead2 = new Lead("juan88", 555, "eee", "ddd");
-        Lead lead3 = new Lead("444", 555, "eee", "ddd");
-        Lead lead4 = new Lead("111", 555, "eee", "ddd");
-        Lead lead5 = new Lead("222", 555, "eee", "ddd");
-        Lead lead6 = new Lead("000", 555, "eee", "ddd");
-
-
-
-        System.out.println(lead1.toString());
-        System.out.println(lead2.toString());
-
-        lalista.add(lead1);
-        lalista.add(lead2);
-        lalista.add(lead3);
-        lalista.add(lead4);
-        lalista.add(lead5);
-        lalista.add(lead6);
-
-
-        showLeads(lalista);
-
-
-
-        //HASTA AQUI SON PRUEBAS //
-
-        ////MENU
 
 
         Scanner scan = new Scanner(System.in);
@@ -159,7 +123,7 @@ public class Main {
             for (int i = 0; i < lista.size(); i++) {
                 int a = lista.get(i).getLeadId();
                 if (a == id) {
-                    System.out.println("Lead's id and name are: " + lista.get(i).getLeadId() + " " + lista.get(i).getName());
+                    System.out.println("Lead's details are: " + lista.get(i).toString());
                     repite = false;
                 }
             }
@@ -196,8 +160,6 @@ public class Main {
         System.out.println("An account has been created with the following data :" + account1.toString() + "\n");
         listaAccounts.add(account1);
     }//
-
-
 
 
     public static void showLeads(List<Lead> lista){
