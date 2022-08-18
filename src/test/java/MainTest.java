@@ -1,7 +1,9 @@
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,14 +12,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class MainTest {
-    Main m1 = new Main();
-    List<Lead> listaLeads = new ArrayList<>() {};
+    List<Lead> listaLeads = new ArrayList<>();
+    List<Account> listaAccounts = new ArrayList<>();
     Lead l1 = new Lead("juan",622733955,"juan@gmail.com","juanCompany");
+    Contact c1 = new Contact("pedro",623525213,"pedro@hotmail.com","pedroCompany");
+    Opportunity o1 = new Opportunity(c1,Product.FLATBED,20);
+    Account a1 = new Account(Industry.PRODUCE,20000,"Paris", "France");
 
-    @BeforeEach
-    void setUp(){
-
+    @AfterEach
+    void tearDown() {
+        listaLeads.removeAll(listaLeads);
+        listaAccounts.removeAll(listaAccounts);
     }
+
 
     @Test
     @DisplayName("Check if new leads are created with the right values")
@@ -44,5 +51,71 @@ public class MainTest {
         listaLeads.get(0).setLeadId(listaLeads.get(1).getLeadId());
         assertThrows(RuntimeException.class,
                 () ->l1.compareId(listaLeads.get(1).getLeadId(),listaLeads.get(0).getLeadId()));
+    }
+
+    @Test
+    @DisplayName("Test lookupLeadId output")
+    void lookupLeadIdTest(){
+        listaLeads.add(l1);
+        String expected = l1.toString();
+        boolean repite = true;
+        while (repite) {
+            int id = l1.getLeadId();
+            for (int i = 0; i < listaLeads.size(); i++) {
+                int a = listaLeads.get(i).getLeadId();
+                if (a == id) {
+                    assertEquals(expected, listaLeads.get(0).toString());
+                    repite = false;
+                }
+            }
+        }
+    }
+
+    @Test
+    @DisplayName("Check convertLead's output")
+    void convertLeadTest() {
+        Contact expectedContact = c1;
+        Opportunity expectedOpportunity = o1;
+        int id = l1.getLeadId();
+        for (int i = 0; i < listaLeads.size(); i++) {
+            int a = listaLeads.get(i).getLeadId();
+            if (a == id) {
+                Contact contact2 = new Contact("pedro",623525213,"pedro@hotmail.com","pedroCompany");
+                assertEquals(expectedContact.getName(),contact2.getName());
+                Product product = Product.FLATBED;
+                int quantity = 20;
+                Opportunity opportunity2 = new Opportunity(contact2, product, quantity);
+                assertEquals(expectedOpportunity.getDecisionMaker(),opportunity2.getDecisionMaker());
+                // Lets make sure Contact ids also differ here.
+                c1.setContactId(contact2.getContactId());
+                assertThrows(RuntimeException.class,
+                        () ->c1.compareId(contact2.getContactId(),c1.getContactId()));
+                // If opportunity ids are equal, throw RTex
+                o1.setOpportunityId(opportunity2.getOpportunityId());
+                assertThrows(RuntimeException.class,
+                        () ->o1.compareId(opportunity2.getOpportunityId(), o1.getOpportunityId()));
+            }
+        }
+
+    }
+    @Test
+    @DisplayName("Check createAccount's output")
+    void createAccountTest () {
+        listaAccounts.add(a1); // expected
+        Industry industry1 = Industry.PRODUCE;
+        int empleados = 20000;
+        String city = "Paris";
+        String country = "France";
+        Account account2 = new Account(industry1, empleados, city, country);
+        listaAccounts.add(account2);
+        assertEquals(listaAccounts.get(0).getIndustry(),listaAccounts.get(1).getIndustry());
+        assertEquals(listaAccounts.get(0).getEmployeeCount(),listaAccounts.get(1).getEmployeeCount());
+        assertEquals(listaAccounts.get(0).getCity(),listaAccounts.get(1).getCity());
+        assertEquals(listaAccounts.get(0).getCountry(),listaAccounts.get(1).getCountry());
+
+        // We also make sure Account ids differ.
+        listaAccounts.get(0).setAccountId(listaAccounts.get(1).getAccountId());
+        assertThrows(RuntimeException.class,
+                () ->a1.compareId(listaAccounts.get(1).getAccountId(),listaAccounts.get(0).getAccountId()));
     }
 }
