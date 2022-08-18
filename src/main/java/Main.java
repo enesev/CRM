@@ -75,7 +75,7 @@ public class Main {
                 switch (option){
 
                     case "new lead":
-                        createNewLead( lalista);
+                        createNewLead(lalista);
 
                         break;
 
@@ -117,8 +117,8 @@ public class Main {
 
 
                     case "close-won id":
-                        int oppId = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
-                        closeWonId(listaOpportunities, oppId);
+                        int oppId2 = PideDatos.pideEntero("Escribe el id de la opportunity a la que le quieres cambiar el status");
+                        closeWonId(listaOpportunities, oppId2);
                         break;
 
 
